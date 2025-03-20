@@ -1,0 +1,18 @@
+services:
+  stork-auto-bot:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: node index.js
+    environment:
+      - NODE_ENV=production
+    networks:
+      - storkbot-network
+    restart: unless-stopped
+
+networks:
+  storkbot-network:
+    driver: bridge
+
