@@ -1,0 +1,44 @@
+# Model arguments
+model_name_or_path: unsloth/Qwen2.5-0.5B-Instruct
+model_revision: main
+torch_dtype: float32  # Dùng FP32 để tối ưu CPU
+attn_implementation: eager  # Nhẹ cho CPU
+bf16: false  # Tắt bf16
+tf32: false  # Tắt vì không cần trên CPU
+output_dir: runs/gsm8k/multinode/Qwen2.5-0.5B-Instruct-Gensyn-Swarm
+
+# Dataset arguments
+dataset_id_or_path: 'openai/gsm8k'
+
+# Lora Arguments
+# No LoRA is used here
+
+# Training arguments
+max_steps: 20  # Tăng để cải thiện win/reward
+per_device_train_batch_size: 2  # Giảm để tăng tốc
+gradient_accumulation_steps: 2  # Giảm để CPU ~60%
+gradient_checkpointing: true  # Tiết kiệm RAM
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+learning_rate: 5.0e-7  # Giữ nguyên
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+
+# GRPO arguments
+use_vllm: false  # Tắt vì chạy CPU
+num_generations: 4  # Tăng để cải thiện win/reward
+beta: 0.001  # Giữ nguyên
+max_prompt_length: 128  # Giảm để tăng tốc
+max_completion_length: 512  # Giảm để tăng tốc
+
+# Logging arguments
+logging_strategy: steps
+logging_steps: 10  # Tăng để giảm tải CPU
+report_to:
+- tensorboard
+save_strategy: steps
+save_steps: 25  # Giữ nguyên
+seed: 42
+
+# Script arguments
+max_rounds: 10000
