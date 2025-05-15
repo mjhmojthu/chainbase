@@ -19,3 +19,7 @@ Sử dụng curl (phổ biến nhất):
 Hoặc nếu muốn lưu với tên khác:
 
      curl -o custom_name.js https://raw.githubusercontent.com/mjhmojthu/chainbase/refs/heads/main/zona.js
+
+0g-storage
+
+     curl -o /root/0g-storage-node/run/config-testnet.toml https://raw.githubusercontent.com/mjhmojthu/chainbase/refs/heads/main/0g-storage/config-testnet.toml
