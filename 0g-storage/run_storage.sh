@@ -51,6 +51,11 @@ function runCommand(name, command, args) {
 // Delay helper
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
+// Lấy số ms random giữa min và max
+function randomDelay(minMs, maxMs) {
+  return minMs + Math.floor(Math.random() * (maxMs - minMs + 1));
+}
+
 // Prompt số lần lặp
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 rl.question('Nhập số lần lặp cho mỗi key: ', async input => {
@@ -71,17 +76,20 @@ rl.question('Nhập số lần lặp cho mỗi key: ', async input => {
       try {
         // GEN storage
         await runCommand(name, CLIENT_BIN, GEN_ARGS);
-        console.log(`[${name}] Chờ 10s...`);
-        await delay(10000);
+        // Delay random 50-60s
+        const waitMs1 = randomDelay(50000, 60000);
+        console.log(`[${name}] Chờ ${Math.round(waitMs1/1000)} giây...`);
+        await delay(waitMs1);
 
         // UPLOAD storage
         const uploadArgs = [...UPLOAD_ARGS];
-        // Đặt privateKey vào đúng vị trí sau --key
         const keyIndex = uploadArgs.findIndex(arg => arg === '--key');
         if (keyIndex !== -1) uploadArgs[keyIndex + 1] = privateKey;
         await runCommand(name, CLIENT_BIN, uploadArgs);
-        console.log(`[${name}] Chờ 10s...`);
-        await delay(10000);
+        // Delay random 50-60s
+        const waitMs2 = randomDelay(30000, 60000);
+        console.log(`[${name}] Chờ ${Math.round(waitMs2/1000)} giây...`);
+        await delay(waitMs2);
       } catch (err) {
         console.error(`❌ [${name}] Lỗi: ${err.message}`);
       }
@@ -90,4 +98,3 @@ rl.question('Nhập số lần lặp cho mỗi key: ', async input => {
 
   console.log('🏁 Hoàn thành tất cả vòng lặp.');
 });
-
