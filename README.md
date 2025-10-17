@@ -7,6 +7,13 @@ https://dashboard.layeredge.io/
 G7kc2eRl
 
 
+Identifier:
+B0A541C5-87C3-43F8-AA1C-70745CA9F4B2
+If the above identifier matches the one displayed by your PC, then use the following key to unlock your drive.
+Recovery Key:
+445445-024332-472725-328306-328526-625449-565026-551177
+If
+
 
 206734-201597-644963-066242-571989-350537-297022-465861
 
